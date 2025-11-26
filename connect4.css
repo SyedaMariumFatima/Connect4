@@ -72,10 +72,6 @@ body {
 
 .confetti-piece {
     position: absolute;
-    /*width: 10px;
-    height: 20px;
-    background-color: red;
-    opacity: 0.8;*/
     animation: fall 3s linear forwards;
 }
 
@@ -86,4 +82,5 @@ body {
     }
 
 }
+
 
