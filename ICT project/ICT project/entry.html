@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Connect 4 - Welcome</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background: linear-gradient(to right, #ffcc00, #ff3300);
+        color: white;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      h1 {
+        font-size: 3em;
+        margin-bottom: 20px;
+      }
+      button {
+        padding: 15px 30px;
+        font-size: 1.2em;
+        border: none;
+        border-radius: 8px;
+        background-color: #333;
+        color: white;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      button:hover {
+        background-color: #cc3b3b;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to Connect 4!</h1>
+    <p>Click below to start playing.</p>
+    <button onclick="window.location.href='connect4.html'">Start Game</button>
+  </body>
+</html>
