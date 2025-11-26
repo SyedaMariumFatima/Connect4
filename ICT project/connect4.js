@@ -59,11 +59,15 @@ function setPiece()
     {
         tile.classList.add("redPiece");
         currPlayer=playerYellow;
+        document.getElementById("turn").innerText = "Yellow's Turn";
+
+
     }
     else 
     {
         tile.classList.add("yellowPiece");
         currPlayer=playerRed;
+        document.getElementById("turn").innerText = "Red's Turn";
     }
 
     //updating row height for column
@@ -91,6 +95,7 @@ function checkWinner() {
                 if(count==3) 
                 {
                     setWinner(r, c);
+                    highlight(r, c, 0, 1);
                     return;
                 }
             }
@@ -114,6 +119,7 @@ function checkWinner() {
                 if(count==3) 
                 {
                     setWinner(r, c);
+                    highlight(r, c, 1, 0);
                     return;
                 }    
             }
@@ -136,6 +142,7 @@ function checkWinner() {
                 if(count==3)
                 {
                     setWinner(r, c);
+                    highlight(r, c, 1, 1);
                     return;
                 }
             }
@@ -157,6 +164,7 @@ function checkWinner() {
                 if(count==3)
                 {
                     setWinner(r, c);
+                    highlight(r, c, -1, 1);
                     return;
                 }
             }
@@ -169,15 +177,64 @@ function setWinner(r, c)
     let winner=document.getElementById("winner");
     if(board[r][c]==playerRed)
     {
-        winner.innerText='Red Wins';
+        winner.innerText='Red Wins!';
     }
-    else winner.innerText='Yellow Wins';
+    else winner.innerText='Yellow Wins!';
 
     gameOver=true;
-    
+    launchConfetti();
+
+}
+//
+function highlight(r, c, rowStep, colStep)
+{
+    let tiles = [];
+
+    for (let i = 0; i < 4; i++) {
+        let newRow = r + rowStep * i;
+        let newCol = c + colStep * i;
+
+        // Collect the 4 winning tiles
+        tiles.push(document.getElementById(newRow + "-" + newCol));
+    }
+
+    // Apply highlight CSS class
+    tiles.forEach(tile => tile.classList.add("winnerHighlight"));
+
+
 }
 
 
+function launchConfetti() {
+  let confettiContainer = document.getElementById("confetti");
+  let colors = ["red", "yellow", "blue", "green", "purple", "orange"];
+
+  for (let i = 0; i < 100; i++) {
+    let piece = document.createElement("div");
+    piece.classList.add("confetti-piece");
+
+    // Random position
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.top = Math.random() * 10 + "vh";
+
+    // Random size & rotation
+    piece.style.width = Math.random() * 8 + 4 + "px";
+    piece.style.height = Math.random() * 8 + 4 + "px";
+    piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+    // Random color
+    piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+    // Random animation timing
+    piece.style.animationDelay = Math.random() * 2 + "s";
+    piece.style.animationDuration = Math.random() * 2 + 3 + "s";
+
+    confettiContainer.appendChild(piece);
+
+    // Remove after animation
+    piece.addEventListener("animationend", () => piece.remove());
+  }
+}
 
 
 
